@@ -1,0 +1,82 @@
+🧩 Database Schema (Tables + Keys)
+---------------------------------------------------------------------------
+1.customer
+
+| Field Name | Data Type | Description      |
+| ---------- | --------- | ---------------- |
+| `Cust_ID`  | INT (PK)  | Customer ID      |
+| `Name`     | TEXT      | Customer name    |
+| `Email`    | TEXT      | Email address    |
+| `Address`  | TEXT      | Location/address |
+
+---------------------------------------------------------------------------
+2.Vendors
+
+| Field Name     | Data Type | Description              |
+| -------------- | --------- | ------------------------ |
+| `HSN_Code`     | TEXT (PK) | Product ID (foreign too) |
+| `Product_Name` | TEXT      | Name of product          |
+| `Vendor_Name`  | TEXT      | Name of vendor           |
+| `Phone`        | TEXT      | Phone number             |
+| `Address`      | TEXT      | Vendor address           |
+
+-------------------------------------------------------------------------------
+3. Products
+
+| Field Name      | Data Type | Description   |
+| --------------- | --------- | ------------- |
+| `HSN_Code`      | TEXT (PK) | Product ID    |
+| `Product_Name`  | TEXT      | Product name  |
+| `Cost`          | FLOAT     | Buying cost   |
+| `Selling_Price` | FLOAT     | Price to sell |
+---------------------------------------------------------------------------
+4. Purchase
+
+| Field Name     | Data Type | Description               |
+| -------------- | --------- | ------------------------- |
+| `HSN_Code`     | TEXT (FK) | Product ID                |
+| `Product_Name` | TEXT      | Product name              |
+| `Vendor`       | TEXT      | Vendor name               |
+| `Date`         | DATE      | Purchase date             |
+| `Units`        | INT       | Quantity purchased        |
+| `Cost`         | FLOAT     | Unit cost                 |
+| `Amount`       | FLOAT     | Total cost (Units × Cost) |
+
+-----------------------------------------------------------------------------
+
+5. Sales
+
+| Field Name     | Data Type | Description      |
+| -------------- | --------- | ---------------- |
+| `Cust_ID`      | INT (FK)  | Customer ID      |
+| `Cust_Name`    | TEXT      | Name of customer |
+| `HSN_Code`     | TEXT (FK) | Product ID       |
+| `Product_Name` | TEXT      | Product name     |
+| `Date`         | DATE      | Sale date        |
+| `Stock`        | INT       | Available stock  |
+| `Units`        | INT       | Units sold       |
+| `Price`        | FLOAT     | Unit price       |
+| `Amount`       | FLOAT     | Total price      |
+
+---------------------------------------------------------------------------
+
+6. Inventory
+
+| Field Name     | Data Type | Description     |
+| -------------- | --------- | --------------- |
+| `HSN_Code`     | TEXT (PK) | Product ID      |
+| `Product_Name` | TEXT      | Product name    |
+| `Cost`         | FLOAT     | Unit cost       |
+| `P_Units`      | INT       | Purchased units |
+| `S_Units`      | INT       | Sold units      |
+| `Stock`        | INT       | Remaining stock |
+| `Stock_Amt`    | FLOAT     | Stock value     |
+
+===================================================================
+
+🔗 Relationships
+Customers ↔ Sales: One-to-Many (Cust_ID)
+
+Vendors ↔ Purchase: Many Vendors may supply the same product (HSN_Code)
+
+Products ↔ Sales/Purchase/Inventory: All are linked via HSN_Code (Product ID)
